@@ -4,7 +4,7 @@ require_relative "../lib/school.rb"
 describe 'School' do
 
   it 'creates a new school object' do
-    school = School.new(school)
-    expect(zipcode.zip).to eq(11710)
+    school = School.new(nil)
+    expect(school.class).to eq(School)
   end
 end
