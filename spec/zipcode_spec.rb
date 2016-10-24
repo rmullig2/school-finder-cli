@@ -12,4 +12,5 @@ describe 'ZipCode' do
     zipcode = ZipCode.new("11710")
     zipcode.valid.size > 40000
   end
+
 end
