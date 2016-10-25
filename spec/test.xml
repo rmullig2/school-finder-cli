@@ -1,0 +1,155 @@
+#(Element:0x15f6c9c {
+  name = "div",
+  attributes = [ #(Attr:0x14e9304 { name = "class", value = "search-result-content column flex-large flex-medium flex-small-12" })],
+  children = [
+    #(Text "\n        "),
+    #(Element:0x15f6c74 {
+      name = "div",
+      children = [
+        #(Text "\n    "),
+        #(Element:0x15f6c4c {
+          name = "h3",
+          attributes = [ #(Attr:0x14d1218 { name = "class", value = "block-tight" })],
+          children = [
+            #(Text "\n        "),
+            #(Element:0x15f6c24 {
+              name = "a",
+              attributes = [
+                #(Attr:0x14b7bd8 {
+                  name = "href",
+                  value = "/education/best-high-schools/new-york/districts/bellmore-merrick-central-high-school-district/john-f-kennedy-high-school-bellmore-13868"
+                  }),
+                #(Attr:0x14b7bc4 { name = "class", value = "search-result-link" })],
+              children = [ #(Text "John F. Kennedy High School (Bellmore)")]
+              }),
+            #(Text "\n    ")]
+          }),
+        #(Text "\n\n    "),
+        #(Element:0x15f6b0c {
+          name = "p",
+          attributes = [ #(Attr:0x122e9d4 { name = "class", value = "text-small" })],
+          children = [
+            #(Text "\n        Bellmore, NY "),
+            #(Element:0x120ce10 { name = "span", attributes = [ #(Attr:0x120b1f0 { name = "class", value = "text-muted" })], children = [ #(Text "|")] }),
+            #(Text " "),
+            #(Element:0x15f6ae4 {
+              name = "a",
+              attributes = [
+                #(Attr:0x11d85e8 {
+                  name = "href",
+                  value = "/education/best-high-schools/new-york/districts/bellmore-merrick-central-high-school-district-100517"
+                  })],
+              children = [ #(Text "Bellmore-Merrick Central High School District")]
+              }),
+            #(Text "\n    ")]
+          }),
+        #(Text "\n\n\n\n\n\n        "),
+        #(Element:0x15f69cc {
+          name = "p",
+          attributes = [ #(Attr:0x119b864 { name = "class", value = "block-tight" })],
+          children = [
+            #(Text "\n                "),
+            #(Element:0x116b9d4 {
+              name = "img",
+              attributes = [
+                #(Attr:0x116aa84 { name = "src", value = "/static/img/mini-badge-silver.svg" }),
+                #(Attr:0x116aa70 { name = "alt", value = "" }),
+                #(Attr:0x116aa20 { name = "style", value = "width: 30px; position: relative; top: -2px; margin-right: 6px;" })]
+              }),
+            #(Text "\n\n                "),
+            #(Element:0x15f69a4 {
+              name = "span",
+              attributes = [ #(Attr:0xfd8e8c { name = "class", value = "text-normal text-strong" })],
+              children = [ #(Text "\n                    #600 in National Rankings\n                ")]
+              }),
+            #(Text "\n\n        ")]
+          }),
+        #(Text "\n        ")]
+      }),
+    #(Text "\n        "),
+    #(Element:0x15f6828 {
+      name = "div",
+      children = [
+        #(Text "\n    "),
+        #(Element:0x15f6800 {
+          name = "p",
+          attributes = [ #(Attr:0x14ff514 { name = "class", value = "text-small show-for-medium-up ellipsis" })],
+          children = [
+            #(Text "\n        John F. Kennedy High School (Bellmore) is ranked 68th within New York. Students have the opportunity to take Advanced Placement® course work and exams. The AP® participation rate at John F. Kennedy High School (Bellmore) is 57 percent. The student body makeup is 50 percent male and 50 percent female, and the total minority enrollment is 7 percent. John F. Kennedy High School (Bellmore) is 1 of 3 high schools in the Bellmore-Merrick Central High School District.\n\n            "),
+            #(Element:0x15f6738 {
+              name = "a",
+              attributes = [
+                #(Attr:0x150a068 {
+                  name = "href",
+                  value = "/education/best-high-schools/new-york/districts/bellmore-merrick-central-high-school-district/john-f-kennedy-high-school-bellmore-13868"
+                  }),
+                #(Attr:0x150a054 { name = "class", value = "ellipsis-show" })],
+              children = [ #(Text "more")]
+              }),
+            #(Text "\n    ")]
+          }),
+        #(Text "\n\n    "),
+        #(Element:0x15ef370 {
+          name = "div",
+          attributes = [ #(Attr:0x164fd88 { name = "class", value = "show-for-small-only" }), #(Attr:0x164fd74 { name = "aria-hidden", value = "true" })],
+          children = [
+            #(Text "\n                "),
+            #(Element:0x15ef348 {
+              name = "div",
+              children = [
+                #(Text "\n                    "),
+                #(Element:0x15ef2e4 {
+                  name = "strong",
+                  attributes = [ #(Attr:0x15f6ee0 { name = "class", value = "text-normal" })],
+                  children = [ #(Text "97%")]
+                  }),
+                #(Text "\n                    "),
+                #(Element:0x15c5f48 {
+                  name = "span",
+                  attributes = [ #(Attr:0x15c5124 { name = "class", value = "text-smaller" })],
+                  children = [ #(Text "Graduation Rate")]
+                  }),
+                #(Text "\n                ")]
+              }),
+            #(Text "\n                "),
+            #(Element:0x15ee9c0 {
+              name = "div",
+              children = [
+                #(Text "\n                    "),
+                #(Element:0x15ee984 {
+                  name = "strong",
+                  attributes = [ #(Attr:0x15a787c { name = "class", value = "text-normal" })],
+                  children = [ #(Text "52.3")]
+                  }),
+                #(Text "\n                    "),
+                #(Element:0x158ae48 {
+                  name = "span",
+                  attributes = [ #(Attr:0x1585f4c { name = "class", value = "text-smaller" })],
+                  children = [ #(Text "College Readiness")]
+                  }),
+                #(Text "\n                ")]
+              }),
+            #(Text "\n                "),
+            #(Element:0x155acc0 {
+              name = "div",
+              children = [
+                #(Text "\n                    "),
+                #(Element:0x15572dc {
+                  name = "strong",
+                  attributes = [ #(Attr:0x1556828 { name = "class", value = "text-normal" })],
+                  children = [ #(Text "Silver")]
+                  }),
+                #(Text "\n                    "),
+                #(Element:0x153405c {
+                  name = "span",
+                  attributes = [ #(Attr:0x1532cfc { name = "class", value = "text-smaller" })],
+                  children = [ #(Text "Medal Awarded")]
+                  }),
+                #(Text "\n                ")]
+              }),
+            #(Text "\n    ")]
+          }),
+        #(Text "\n        ")]
+      }),
+    #(Text "\n    ")]
+  })
