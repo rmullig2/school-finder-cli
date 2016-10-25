@@ -10,7 +10,7 @@ describe 'School' do
   
   it 'creates a school object from XML' do
     xml_school = File.read("spec/test.xml")
-    school = School.new(nil)
+    school = School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=11710")
     expect(school.class).to eq(School)
   end
   
