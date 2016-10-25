@@ -8,6 +8,7 @@ class School
   attr_accessor 
 
   @@list = []
+  @@summary = []
 
   def initialize(school_HTML)
     if school_HTML != nil
@@ -21,6 +22,7 @@ class School
         @description = school.children[3].children[1].children.text
         @grad_rate = schools.css(".show-for-small-only")[0].children[1].children[1].children.text
         @readiness = schools.css(".show-for-small-only")[0].children[3].children[1].text
+        @@summary << { :name => @name, :rank => @rank }
         @@list << { :name => @name, :district => @district, :rank => @rank, :description => @description,
           :grad_rate => @grad_rate, :readiness => @readiness }
       }
