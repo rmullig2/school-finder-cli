@@ -30,4 +30,8 @@ class School
     end
   end
   
+  def summary
+    @@summary
+  end
+  
 end
