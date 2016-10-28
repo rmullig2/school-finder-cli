@@ -12,7 +12,7 @@ class School
 
   def initialize(school_HTML, zip)
     if school_HTML != nil
-      page = Nokogiri::HTML(open(school_HTML))
+      page = Nokogiri::HTML(open(school_HTML, 'User-Agent' => 'firefox'))
       schools = page.css(".search-result-content")
       schools.each { |school| 
         @name = school.children[1].children[1].children[1].children.text
