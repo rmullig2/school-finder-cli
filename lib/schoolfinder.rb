@@ -12,7 +12,7 @@ class SchoolFinder
     zip = gets.chomp!
     zipcode = ZipCode.new(zip)
     #    binding.pry
-    puts "Please enter the maximum search radius in miles"
+    puts "Please enter the maximum search radius in miles (0-30)"
     miles = gets.chomp.to_i
     puts "Please enter your income (hit enter to skip this step)"
     income = gets.chomp.to_i
