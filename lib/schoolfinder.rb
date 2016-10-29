@@ -3,17 +3,17 @@ require 'pry'
 
 class SchoolFinder
 
-  attr_accessor :zip, :miles, :income, :results
+  attr_accessor :zipcode, :miles, :income, :results
 
   def initialize
   end
 
   def call
     puts "Welcome to the School Finder application!"
-    puts "Please enter a zip code from where you wish to search"
-    @zip = gets.chomp!
-    zipcode = ZipCode.new(@zip)
-    #    binding.pry
+    puts "Please enter a zip code from where you wish to search or enter to exit"
+    zip = gets.chomp!
+    zip.empty? && return
+    @zipcode = ZipCode.new(zip)
     puts "Please enter the maximum search radius in miles (0-30)"
     @miles = gets.chomp.to_i
     check("miles", @miles)
@@ -23,7 +23,7 @@ class SchoolFinder
     puts "Please enter the number of results you would like to see (default = 50)"
     @results = gets.chomp.to_i
     check("results", @results)
-    puts "Zip = #{zipcode.zip}, miles = #{miles}, income = #{income}, results = #{results}"
+    school_list
   end
 
   def check(check_type, value)
@@ -49,12 +49,14 @@ class SchoolFinder
     end
   end
 
-# CLI for school finder app
-# Welcome user (hit enter to exit)
-# Ask for zip code
-# Ask for search radius
-# Ask for income (optional)
-# Ask for number of results
+  def school_list
+    @results != 0 ? zipcodes = @zipcode.getRange(@zipcode.zip, @miles, @results) : zipcodes = @zipcode.getRange(@zipcode.zip, @miles)
+    binding.pry
+    zipcodes.each { |zipcode| School.new(zipcode) }
+    summary = School.summary
+    detail = School.list
+  end
+
 #
 # Print numbered list of schools
 # Ask user if they want further details on one of the schools
