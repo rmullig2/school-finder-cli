@@ -3,7 +3,7 @@ require 'pry'
 
 class SchoolFinder
 
-  attr_accessor :zip, :miles, :income
+  attr_accessor :zip, :miles, :income, :results
 
   def initialize
   end
@@ -19,8 +19,10 @@ class SchoolFinder
     check("miles", @miles)
     puts "Please enter your income (hit enter to skip this step)"
     @income = gets.chomp.to_i
-    puts "Please enter the number of results you would like to see"
-    results = gets.chomp.to_i
+    check("income", @income)
+    puts "Please enter the number of results you would like to see (default = 50)"
+    @results = gets.chomp.to_i
+    check("results", @results)
     puts "Zip = #{zipcode.zip}, miles = #{miles}, income = #{income}, results = #{results}"
   end
 
@@ -32,6 +34,18 @@ class SchoolFinder
         value = gets.chomp.to_i
       end
       @miles = value
+    when "income"
+      while value < 0
+        puts "Please enter a number greater than or equal to zero"
+        value = gets.chomp.to_i
+      end
+      @income = value
+    when "results"
+      while value < 0
+        puts "Please enter a number greater than zero or hit enter to accept the default value"
+        value = gets.chomp.to_i
+      end
+      @results = value
     end
   end
 
