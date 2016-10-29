@@ -33,10 +33,20 @@ class ZipCode
     keys = results.split(",")
     results = data.to_s.match(/\\n[0-9a-zA-Z\,\.]+/)
     values = results.to_s.slice(2..-1).split(",")
-    binding.pry
     @demo = {}
     for i in 0..keys.size - 1
       @demo[keys[i]] = values[i]
+    end
+  end
+
+  def getRange(zip, radius, results = 50)
+    html = "https://www.zip-codes.com/zip-code-radius-finder.asp?zipmileslLow=0&zipmileshigh=#{radius}&zip1=#{zip}&submit=Search"
+    page = Nokogiri::HTML(open(html))
+    children_size = page.css("#tableview table tr td").children.children.size
+    counter = 1
+    while counter < children_size && counter < results * 3 - 3
+      @range << page.css("#tableview table tr td").children.children[counter].text
+      counter += 3
     end
   end
 
