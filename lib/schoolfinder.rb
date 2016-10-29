@@ -1,4 +1,5 @@
-require "zipcode.rb"
+require_relative "./zipcode"
+require 'pry'
 
 class SchoolFinder
 
@@ -8,15 +9,16 @@ class SchoolFinder
   def call
     puts "Welcome to the School Finder application!"
     puts "Please enter a zip code from where you wish to search"
-    zip = gets.chomp.to_i
-#    zipcode = ZipCode.new(zip)
+    zip = gets.chomp!
+    zipcode = ZipCode.new(zip)
+    #    binding.pry
     puts "Please enter the maximum search radius in miles"
     miles = gets.chomp.to_i
     puts "Please enter your income (hit enter to skip this step)"
     income = gets.chomp.to_i
     puts "Please enter the number of results you would like to see"
     results = gets.chomp.to_i
-    puts "Zip = #{zip}, miles = #{miles}, income = #{income}, results = #{results}"
+    puts "Zip = #{zipcode.zip}, miles = #{miles}, income = #{income}, results = #{results}"
   end
 
 # CLI for school finder app
