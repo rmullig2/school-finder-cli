@@ -10,7 +10,7 @@ class ZipCode
     @valid = File.open("zips.txt").readlines.each { |zip| zip.chomp! }
     setZip(zip)
     @range = []
-    @range << self.zip
+    #@range << self.zip
   end
 
   def setZip(zip)
@@ -52,6 +52,6 @@ class ZipCode
 
 end
 
-test = ZipCode.new("11710")
-test.demographics(test.zip)
-binding.pry
+#test = ZipCode.new("11710")
+#test.demographics(test.zip)
+#binding.pry
