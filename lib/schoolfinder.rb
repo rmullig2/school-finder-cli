@@ -53,10 +53,13 @@ class SchoolFinder
   def school_list
     @results != 0 ? @zipcode.getRange(@zipcode.zip, @miles, @results) : @zipcode.getRange(@zipcode.zip, @miles)
     zipcodes = @zipcode.range
-    binding.pry
+    #binding.pry
     zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{zipcode}", zipcode) }
     summary = School.summary
+    summary.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
     detail = School.list
+    detail.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
+    binding.pry
   end
 
 #

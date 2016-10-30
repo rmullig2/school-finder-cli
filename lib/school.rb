@@ -19,12 +19,12 @@ class School
         @zip = zip
         @district = school.children[1].children[3].children[3].children.text
         if school.children[1].children[5].children[3] == nil
-          @rank = "nil"
+          @rank = nil
         else
           @ranking = school.children[1].children[5].children[3].children.text
-          @rank = /\#[0-9]+/.match(@ranking.to_s)[0].slice(1..-1)
+          @rank = /\#[0-9]+/.match(@ranking.to_s)[0].slice(1..-1).to_i
         end
-        binding.pry
+        #binding.pry
         @description = school.children[3].children[1].children.text
         @grad_rate = schools.css(".show-for-small-only")[0].children[1].children[1].children.text
         @readiness = schools.css(".show-for-small-only")[0].children[3].children[1].text
