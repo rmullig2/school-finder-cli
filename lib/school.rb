@@ -16,13 +16,20 @@ class School
       schools = page.css(".search-result-content")
       schools.each { |school|
         @name = school.children[1].children[1].children[1].children.text
-        @zip = zip
+        #@zip = zip
+        @zip = ZipCode.new(zip).zip
         @district = school.children[1].children[3].children[3].children.text
+        binding.pry
         if school.children[1].children[5].children[3] == nil
           @rank = nil
         else
           @ranking = school.children[1].children[5].children[3].children.text
-          @rank = /\#[0-9]+/.match(@ranking.to_s)[0].slice(1..-1).to_i
+          #@rank = /\#[0-9]+/.match(@ranking.to_s)[0].slice(1..-1).to_i
+          #@rank = /\#[0-9]+/.match(@ranking.to_s)[0].slice(1..-1)
+          @rank = /\#[0-9]+/.match(@ranking.to_s)
+          if @rank
+            @rank = @rank[0].slice(1..-1).to_i
+          end
         end
         #binding.pry
         @description = school.children[3].children[1].children.text

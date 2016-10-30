@@ -6,15 +6,20 @@ class ZipCode
   attr_accessor :zip, :demo
   attr_reader :valid
 
+@@valid = File.open("zips.txt").readlines.each { |zip| zip.chomp! }
+@@all = []
+
   def initialize(zip)
-    @valid = File.open("zips.txt").readlines.each { |zip| zip.chomp! }
+    #@valid = File.open("zips.txt").readlines.each { |zip| zip.chomp! }
     setZip(zip)
     @range = []
-    #@range << self.zip
+    if !ZipCode.all.detect { |zipcode| zipcode.zip == @zip }
+      @@all << self
+    end
   end
 
   def setZip(zip)
-    while !@valid.include?(zip)
+    while !@@valid.include?(zip)
       puts "That zip code is invalid, please enter a new one"
       zip = gets.chomp!
     end
@@ -48,6 +53,10 @@ class ZipCode
       @range << page.css("#tableview table tr td").children.children[counter].text
       counter += 3
     end
+  end
+
+  def self.all
+    @@all
   end
 
 end
