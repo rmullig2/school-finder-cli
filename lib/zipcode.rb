@@ -24,6 +24,7 @@ class ZipCode
       zip = gets.chomp!
     end
     @zip = zip
+    demographics(zip)
   end
 
   def range
@@ -47,7 +48,7 @@ class ZipCode
   end
 
   #def getRange(zip, radius, results = 5)
-  def getRange(zip, radius)
+  def getRange(zip, radius, income)
     html = "https://www.zip-codes.com/zip-code-radius-finder.asp?zipmileslLow=0&zipmileshigh=#{radius}&zip1=#{zip}&submit=Search"
     page = Nokogiri::HTML(open(html))
     children_size = page.css("#tableview table tr td").children.children.size
@@ -57,7 +58,9 @@ class ZipCode
       #@range << page.css("#tableview table tr td").children.children[counter].text
       newZip = ZipCode.new(page.css("#tableview table tr td").children.children[counter].text)
       #binding.pry
-      @range << newZip
+      if newZip.demo["MedianIncome"].to_i <= income
+        @range << newZip
+      end
       counter += 3
     end
   end

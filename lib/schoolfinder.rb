@@ -40,7 +40,11 @@ class SchoolFinder
         puts "Please enter a number greater than or equal to zero"
         value = gets.chomp.to_i
       end
-      @income = value
+      if value != 0
+        @income = value
+      else
+        @income = 10000000
+      end
     when "results"
       while value < 0
         puts "Please enter a number greater than zero or hit enter to accept the default value"
@@ -56,7 +60,7 @@ class SchoolFinder
 
   def school_list
     #@results != 0 ? @zipcode.getRange(@zipcode.zip, @miles, @results) : @zipcode.getRange(@zipcode.zip, @miles)
-    @zipcode.getRange(@zipcode.zip, @miles)
+    @zipcode.getRange(@zipcode.zip, @miles, @income)
     zipcodes = @zipcode.range
     binding.pry
     zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{zipcode.zip}", zipcode) }
@@ -77,6 +81,10 @@ class SchoolFinder
         puts "##{i+1}. #{summary[i][:name]} - no ranking"
       end
     end
+  end
+
+  def filter_income
+
   end
 
 
