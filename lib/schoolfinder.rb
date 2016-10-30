@@ -4,7 +4,7 @@ require 'pry'
 
 class SchoolFinder
 
-  attr_accessor :zip, :zipcode, :miles, :income, :results
+  attr_accessor :zip, :zipcode, :miles, :income, :results, :summary, :detail
 
   def initialize
   end
@@ -55,12 +55,25 @@ class SchoolFinder
     zipcodes = @zipcode.range
     #binding.pry
     zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{zipcode}", zipcode) }
-    summary = School.summary
-    summary.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
-    detail = School.list
-    detail.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
+    @summary = School.summary
+    @summary.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
+    @detail = School.list
+    @detail.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
     binding.pry
+    display_schools
   end
+
+  def display_schools
+    for i in 0..summary.size - 1 do
+      if summary[i][:rank]
+        puts "##{i+1}. #{summary[i][:name]} - rank #{summary[i][:rank]}"
+      else
+        puts "##{i+1}. #{summary[i][:name]} - no ranking"
+      end
+    end
+  end
+
+
 
 #
 # Print numbered list of schools
