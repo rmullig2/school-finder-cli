@@ -1,9 +1,10 @@
 require_relative "./zipcode"
+require_relative "./school"
 require 'pry'
 
 class SchoolFinder
 
-  attr_accessor :zipcode, :miles, :income, :results
+  attr_accessor :zip, :zipcode, :miles, :income, :results
 
   def initialize
   end
@@ -11,9 +12,9 @@ class SchoolFinder
   def call
     puts "Welcome to the School Finder application!"
     puts "Please enter a zip code from where you wish to search or enter to exit"
-    zip = gets.chomp!
-    zip.empty? && return
-    @zipcode = ZipCode.new(zip)
+    @zip = gets.chomp!
+    @zip.empty? && return
+    @zipcode = ZipCode.new(@zip)
     puts "Please enter the maximum search radius in miles (0-30)"
     @miles = gets.chomp.to_i
     check("miles", @miles)
@@ -50,11 +51,12 @@ class SchoolFinder
   end
 
   def school_list
-    @results != 0 ? zipcodes = @zipcode.getRange(@zipcode.zip, @miles, @results) : zipcodes = @zipcode.getRange(@zipcode.zip, @miles)
-    binding.pry
-    zipcodes.each { |zipcode| School.new(zipcode) }
+    @results != 0 ? @zipcode.getRange(@zipcode.zip, @miles, @results) : @zipcode.getRange(@zipcode.zip, @miles)
+    zipcodes = @zipcode.range
+    zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{@zip}", @zip) }
     summary = School.summary
     detail = School.list
+    binding.pry
   end
 
 #

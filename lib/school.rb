@@ -5,16 +5,16 @@ require 'open-uri'
 class School
 
   attr_reader :list
-  attr_accessor 
+  attr_accessor
 
   @@list = []
   @@summary = []
 
   def initialize(school_HTML, zip)
     if school_HTML != nil
-      page = Nokogiri::HTML(open(school_HTML))
+      page = Nokogiri::HTML(open(school_HTML, 'User-Agent' => 'firefox'))
       schools = page.css(".search-result-content")
-      schools.each { |school| 
+      schools.each { |school|
         @name = school.children[1].children[1].children[1].children.text
         @zip = zip
         @district = school.children[1].children[3].children[3].children.text
@@ -29,9 +29,13 @@ class School
       }
     end
   end
-  
-  def summary
+
+  def self.summary
     @@summary
   end
-  
+
+  def self.list
+    @@list
+  end
+#  binding.pry
 end
