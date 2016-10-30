@@ -19,7 +19,7 @@ class School
         #@zip = zip
         @zip = ZipCode.new(zip).zip
         @district = school.children[1].children[3].children[3].children.text
-        binding.pry
+        #binding.pry
         if school.children[1].children[5].children[3] == nil
           @rank = nil
         else
