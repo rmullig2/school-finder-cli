@@ -62,13 +62,13 @@ class SchoolFinder
     #@results != 0 ? @zipcode.getRange(@zipcode.zip, @miles, @results) : @zipcode.getRange(@zipcode.zip, @miles)
     @zipcode.getRange(@zipcode.zip, @miles, @income)
     zipcodes = @zipcode.range
-    binding.pry
+    #binding.pry
     zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{zipcode.zip}", zipcode) }
     @summary = School.summary
     @summary.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
     @detail = School.list
     @detail.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
-    binding.pry
+    #binding.pry
     display_schools
   end
 
@@ -84,23 +84,12 @@ class SchoolFinder
     response = true
     while response
       puts "\nSelect a school for further information or hit enter to start over"
-      response = gets.match(/[0-9]/)
-      response > 0 && response < total && puts(@detail[response-1])
+      response = gets.match(/[0-9]+/)[0].to_i
+      #response && response > 0 && response < total && puts(@detail[response-1])
+      response && response > 0 && response < total && Pry::ColorPrinter.pp(@detail[response-1])
     end
   end
 
-  def filter_income
-
-  end
-
-
-
-#
-# Print numbered list of schools
-# Ask user if they want further details on one of the schools
-#   If yes, then print further details on specified schhol
-#     print numbered list of schools and prompt user again
-#   If no, then go back to welcome user
 end
 
 test = SchoolFinder.new
