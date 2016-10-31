@@ -81,6 +81,12 @@ class SchoolFinder
         puts "##{i+1}. #{summary[i][:name]} - no ranking"
       end
     end
+    response = true
+    while response
+      puts "\nSelect a school for further information or hit enter to start over"
+      response = gets.match(/[0-9]/)
+      response > 0 && response < total && puts(@detail[response-1])
+    end
   end
 
   def filter_income

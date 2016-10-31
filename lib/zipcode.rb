@@ -35,6 +35,7 @@ class ZipCode
     #html = "http://zipwho.com/?zip=#{zip}&city=&filters=--_--_--_--&state=&mode=#{zip}"
     html = "http://zipwho.com/?zip=10010&city=&filters=--_--_--_--&state=&mode=zip#{zip}&city=&filters=--_--_--_--&state=&mode=#{zip}"
     page = Nokogiri::HTML(open(html))
+    binding.pry
     data = page.css("html head script").children[0].text
     results = data.match(/\"[a-zA-Z\,]+/)[0].slice(1..-1)
     keys = results.split(",")
