@@ -4,7 +4,7 @@ require 'pry'
 
 class SchoolFinder
 
-  attr_accessor :zip, :zipcode, :miles, :income, :results
+  attr_accessor :zip, :zipcode, :miles, :income, :results, :summary, :detail
 
   def initialize
   end
@@ -40,31 +40,56 @@ class SchoolFinder
         puts "Please enter a number greater than or equal to zero"
         value = gets.chomp.to_i
       end
-      @income = value
+      if value != 0
+        @income = value
+      else
+        @income = 10000000
+      end
     when "results"
       while value < 0
         puts "Please enter a number greater than zero or hit enter to accept the default value"
         value = gets.chomp.to_i
       end
-      @results = value
+      if value
+        @results = value
+      else
+        @results = 50
+      end
     end
   end
 
   def school_list
-    @results != 0 ? @zipcode.getRange(@zipcode.zip, @miles, @results) : @zipcode.getRange(@zipcode.zip, @miles)
+    #@results != 0 ? @zipcode.getRange(@zipcode.zip, @miles, @results) : @zipcode.getRange(@zipcode.zip, @miles)
+    @zipcode.getRange(@zipcode.zip, @miles, @income)
     zipcodes = @zipcode.range
-    zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{@zip}", @zip) }
-    summary = School.summary
-    detail = School.list
-    binding.pry
+    #binding.pry
+    zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{zipcode.zip}", zipcode) }
+    @summary = School.summary
+    @summary.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
+    @detail = School.list
+    @detail.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
+    #binding.pry
+    display_schools
   end
 
-#
-# Print numbered list of schools
-# Ask user if they want further details on one of the schools
-#   If yes, then print further details on specified schhol
-#     print numbered list of schools and prompt user again
-#   If no, then go back to welcome user
+  def display_schools
+    total = summary.size - 1 < results ? summary.size - 1 : results
+    for i in 0..total - 1 do
+      if summary[i][:rank]
+        puts "##{i+1}. #{summary[i][:name]} - rank #{summary[i][:rank]}"
+      else
+        puts "##{i+1}. #{summary[i][:name]} - no ranking"
+      end
+    end
+    response = true
+    while response
+      puts "\nSelect a school for further information or hit enter to start over"
+      response = gets.match(/[0-9]+/)[0].to_i
+      #response && response > 0 && response < total && puts(@detail[response-1])
+      response && response > 0 && response < total && Pry::ColorPrinter.pp(@detail[response-1])
+    end
+  end
+
 end
 
 test = SchoolFinder.new
