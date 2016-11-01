@@ -21,7 +21,6 @@ class School
   def get_schoolinfo(zip)
     @schools.each { |school|
       @name = school.children[1].children[1].children[1].children.text
-      #@zip = ZipCode.new(zip).zip
       @zip = zip
       @district = school.children[1].children[3].children[3].children.text
       #binding.pry

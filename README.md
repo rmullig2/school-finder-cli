@@ -19,22 +19,50 @@ This application tries to simplify this process. It queries the user for a zip c
 ### The `ZipCode` Class
 
 
-#### The `#` Method
+#### The `setZip` Method
+    Obtains the zip code from the user then obtain demographic information for the specified zip code.
 
-#### The `#` Method
+#### The `demographics` Method
+    Scrapes the web for demographic information.
+    
+#### The 'getRange' Method
+    Scrapes the web for a list of zip codes within a given radius.
+    
+#### The 'range' Method
+    Returns the range array
+    
+#### The '.all' Method
+    This class method should return the contents of the `@@all` array.
+
 
 ### The `School` Class
 
-#### The `#`
+#### The `get_schoolInfo` Method
+    Scrapes the web for school information.
 
-##### The `#` Method
+#### The `.summary` Method
 
-#### The `#` Method
+    This class method should return the contents of the `@@summary` array.
 
-#### The `.all` Method
+#### The `.list` Method
 
-This class method should return the contents of the `@@all` array.
+    This class method should return the contents of the `@@list` array.
 
-## Our Code in Action
 
-Now that you have all your tests passing, you can run our executable file, which relies on our `CommandLineInterface` class.
+#### The `SchoolFinder` Class
+
+#### The 'call' Method
+
+    Main method called by program. Gets user input and calls school_list method
+    
+#### The 'check' Method
+
+    Tests the user input and prompts the user to re-enter if it is invalid.
+    
+#### The 'school_list' Method
+
+    Creates sorted arrays with summary and detail information.
+    
+#### The 'display_school' Method
+
+    Displays initial list of schools and detailed information for selected school.
