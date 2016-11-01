@@ -32,9 +32,13 @@ class ZipCode
   end
 
   def demographics(zip)
-    #html = "http://zipwho.com/?zip=#{zip}&city=&filters=--_--_--_--&state=&mode=#{zip}"
+#    binding.pry
     html = "http://zipwho.com/?zip=10010&city=&filters=--_--_--_--&state=&mode=zip#{zip}&city=&filters=--_--_--_--&state=&mode=#{zip}"
     page = Nokogiri::HTML(open(html))
+    if page.css("body").children.text == "?"
+        puts "Web site down - please try again later"
+        exit
+    end
     #binding.pry
     data = page.css("html head script").children[0].text
     results = data.match(/\"[a-zA-Z\,]+/)[0].slice(1..-1)

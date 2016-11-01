@@ -10,21 +10,25 @@ class SchoolFinder
   end
 
   def call
-    puts "Welcome to the School Finder application!"
-    puts "Please enter a zip code from where you wish to search or enter to exit"
-    @zip = gets.chomp!
-    @zip.empty? && return
-    @zipcode = ZipCode.new(@zip)
-    puts "Please enter the maximum search radius in miles (0-30)"
-    @miles = gets.chomp.to_i
-    check("miles", @miles)
-    puts "Please enter your income (hit enter to skip this step)"
-    @income = gets.chomp.to_i
-    check("income", @income)
-    puts "Please enter the number of results you would like to see (default = 50)"
-    @results = gets.chomp.to_i
-    check("results", @results)
-    school_list
+    while true
+      puts "Welcome to the School Finder application!"
+      puts "Please enter a zip code from where you wish to search or enter to exit"
+      @zip = gets.chomp!
+      if @zip == ""
+        exit
+      end
+      @zipcode = ZipCode.new(@zip)
+      puts "Please enter the maximum search radius in miles (0-30)"
+      @miles = gets.chomp.to_i
+      check("miles", @miles)
+      puts "Please enter your income (hit enter to skip this step)"
+      @income = gets.chomp.to_i
+      check("income", @income)
+      puts "Please enter the number of results you would like to see (default = 50)"
+      @results = gets.chomp.to_i
+      check("results", @results)
+      school_list
+    end
   end
 
   def check(check_type, value)
@@ -59,7 +63,6 @@ class SchoolFinder
   end
 
   def school_list
-    #@results != 0 ? @zipcode.getRange(@zipcode.zip, @miles, @results) : @zipcode.getRange(@zipcode.zip, @miles)
     @zipcode.getRange(@zipcode.zip, @miles, @income)
     zipcodes = @zipcode.range
     #binding.pry
@@ -81,12 +84,15 @@ class SchoolFinder
         puts "##{i+1}. #{summary[i][:name]} - no ranking"
       end
     end
-    response = true
-    while response
+    while true
       puts "\nSelect a school for further information or hit enter to start over"
-      response = gets.match(/[0-9]+/)[0].to_i
-      #response && response > 0 && response < total && puts(@detail[response-1])
-      response && response > 0 && response < total && Pry::ColorPrinter.pp(@detail[response-1])
+      response = gets.chomp!
+      if response == ""
+        exit
+      end
+      response = response.match(/[0-9]+/)[0].to_i
+      response > 0 && response < total && puts(@detail[response-1][:zip].demo.each { |key, value| puts("#{value} is the #{key.split(/(?=[A-Z])/).join(" ")}") });0
+      #binding.pry
     end
   end
 
