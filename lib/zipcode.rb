@@ -24,6 +24,7 @@ class ZipCode
       zip = gets.chomp!
     end
     @zip = zip
+    #binding.pry
     demographics(zip)
     #binding.pry
   end
@@ -35,8 +36,14 @@ class ZipCode
   def demographics(zip)
 #    binding.pry
     #html = "http://zipwho.com/?zip=#{zip}&city=&filters=--_--_--_--&state=&mode=zip"
+    @demo = {}
     html = "http://neighborhoodlink.com/zip/#{zip}"
-    page = Nokogiri::HTML(open(html))
+    #binding.pry
+    begin
+      page = Nokogiri::HTML(open(html))
+    rescue
+      return
+    end
     #if page.css("body").children.text == "?"
     #    puts "Web site down - please try again later"
     #    exit
@@ -53,7 +60,6 @@ class ZipCode
     
     #keys = results.split(",")
     #values = data.to_s.match(/[0-9]{5}[a-zA-Z0-9, .]+/)[0].split(',')
-    @demo = {}
     for i in 1..results.size - 1
       #binding.pry
       key, value = results[i].split(":")
@@ -69,7 +75,7 @@ class ZipCode
     #binding.pry
     while counter < children_size
       newZip = ZipCode.new(page.css("#tableview table tr td").children.children[counter].text)
-      binding.pry
+      #binding.pry
       if newZip.demo.size > 0 && newZip.demo["Median Family Income"].gsub(/[$\, ]/,"").to_i <= income
         @range << newZip
       end
