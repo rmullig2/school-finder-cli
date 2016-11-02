@@ -34,34 +34,19 @@ class ZipCode
   end
 
   def demographics(zip)
-#    binding.pry
-    #html = "http://zipwho.com/?zip=#{zip}&city=&filters=--_--_--_--&state=&mode=zip"
     @demo = {}
     html = "http://neighborhoodlink.com/zip/#{zip}"
-    #binding.pry
     begin
       page = Nokogiri::HTML(open(html))
     rescue
       return
     end
-    #if page.css("body").children.text == "?"
-    #    puts "Web site down - please try again later"
-    #    exit
-    #end
-    #binding.pry
-    #data = page.css("html head script").children[0].text
     results = []
     data = page.css("#economics li")
     for i in 1..data.size - 1
       results[i] = data[i].text
     end
-    #binding.pry
-    #results = data.match(/\"[a-zA-Z\,]+/)[0].slice(1..-1)
-    
-    #keys = results.split(",")
-    #values = data.to_s.match(/[0-9]{5}[a-zA-Z0-9, .]+/)[0].split(',')
     for i in 1..results.size - 1
-      #binding.pry
       key, value = results[i].split(":")
       @demo[key] = value
     end
@@ -69,17 +54,15 @@ class ZipCode
 
   def getRange(zip, radius, income)
     html = "https://www.zip-codes.com/zip-code-radius-finder.asp?zipmileslLow=0&zipmileshigh=#{radius}&zip1=#{zip}&submit=Search"
+    #binding.pry
     page = Nokogiri::HTML(open(html))
     children_size = page.css("#tableview table tr td").children.children.size
     counter = 1
-    #binding.pry
     while counter < children_size
       newZip = ZipCode.new(page.css("#tableview table tr td").children.children[counter].text)
-      #binding.pry
       if newZip.demo.size > 0 && newZip.demo["Median Family Income"].gsub(/[$\, ]/,"").to_i <= income
         @range << newZip
       end
-      #binding.pry
       counter += 3
     end
   end
@@ -89,7 +72,3 @@ class ZipCode
   end
 
 end
-
-#test = ZipCode.new("11710")
-#test.demographics(test.zip)
-#binding.pry

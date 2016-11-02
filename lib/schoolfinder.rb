@@ -52,7 +52,7 @@ class SchoolFinder
         puts "Please enter a number greater than zero or hit enter to accept the default value"
         value = gets.chomp.to_i
       end
-      if value
+      if value > 0
         @results = value
       else
         @results = 50
@@ -63,24 +63,23 @@ class SchoolFinder
   def school_list
     @zipcode.getRange(@zipcode.zip, @miles, @income)
     zipcodes = @zipcode.range
-    #binding.pry
     zipcodes.each { |zipcode| School.new("http://www.usnews.com/education/best-high-schools/search?city-or-zip=#{zipcode.zip}", zipcode) }
     @summary = School.summary
     @summary.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
     @detail = School.list
     @detail.sort_by! { |school| [school[:rank] ? 0 : 1, school[:rank] || 0] }
-    #binding.pry
     display_schools
   end
 
   def display_schools
-    total = summary.size - 1 < results ? summary.size - 1 : results
+    total = @summary.size - 1 < @results ? @summary.size - 1 : @results
     while true
-      for i in 0..total - 1 do
-        if summary[i][:rank]
-          puts "##{i+1}. #{summary[i][:name]} - rank #{summary[i][:rank]}"
+#      binding.pry
+      for i in 0..total do
+        if @summary[i][:rank]
+          puts "##{i+1}. #{@summary[i][:name]} - rank #{@summary[i][:rank]}"
         else
-          puts "##{i+1}. #{summary[i][:name]} - no ranking"
+          puts "##{i+1}. #{@summary[i][:name]} - no ranking"
         end
       end
       puts "\nSelect a school for further information or hit enter to exit"
@@ -89,13 +88,15 @@ class SchoolFinder
         exit
       end
       response = response.match(/[0-9]+/)[0].to_i
-      if response > 0 && response < total
-        puts(@detail[response-1][:zip].demo.each { |key, value| puts("#{value} is the #{key.split(/(?=[A-Z])/).join(" ")}") })
-      end
       #binding.pry
+      if response > 0 && response - 1<= total
+        puts(@detail[response-1][:zip].demo.each { |key, value| puts("#{value} is the #{key.split(/(?=[A-Z])/).join(" ")}") })
+        puts
+        puts
+      end
     end
   end
-
+  
 end
 
 test = SchoolFinder.new
