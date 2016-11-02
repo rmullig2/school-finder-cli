@@ -25,6 +25,7 @@ class ZipCode
     end
     @zip = zip
     demographics(zip)
+    #binding.pry
   end
 
   def range
@@ -47,7 +48,7 @@ class ZipCode
     for i in 1..data.size - 1
       results[i] = data[i].text
     end
-    
+    #binding.pry
     #results = data.match(/\"[a-zA-Z\,]+/)[0].slice(1..-1)
     
     #keys = results.split(",")
@@ -65,12 +66,14 @@ class ZipCode
     page = Nokogiri::HTML(open(html))
     children_size = page.css("#tableview table tr td").children.children.size
     counter = 1
+    #binding.pry
     while counter < children_size
       newZip = ZipCode.new(page.css("#tableview table tr td").children.children[counter].text)
-      #binding.pry
-      if newZip.demo["MedianIncome"].to_i <= income
+      binding.pry
+      if newZip.demo.size > 0 && newZip.demo["Median Family Income"].gsub(/[$\, ]/,"").to_i <= income
         @range << newZip
       end
+      #binding.pry
       counter += 3
     end
   end
