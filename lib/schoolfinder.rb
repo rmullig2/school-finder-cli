@@ -83,7 +83,7 @@ class SchoolFinder
           puts "##{i+1}. #{summary[i][:name]} - no ranking"
         end
       end
-      puts "\nSelect a school for further information or hit enter to start over"
+      puts "\nSelect a school for further information or hit enter to exit"
       response = gets.chomp!
       if response == ""
         exit
