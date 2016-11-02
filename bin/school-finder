@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
 
 require_relative '../config/environment'
-require_relative "../lib/schoolfinder.rb"
+#require_relative "../lib/schoolfinder.rb"
 SchoolFinder.new.call

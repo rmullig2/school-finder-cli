@@ -10,25 +10,23 @@ class SchoolFinder
   end
 
   def call
-    while true
-      puts "Welcome to the School Finder application!"
-      puts "Please enter a zip code from where you wish to search or enter to exit"
-      @zip = gets.chomp!
-      if @zip == ""
-        exit
-      end
-      @zipcode = ZipCode.new(@zip)
-      puts "Please enter the maximum search radius in miles (0-30)"
-      @miles = gets.chomp.to_i
-      check("miles", @miles)
-      puts "Please enter your income (hit enter to skip this step)"
-      @income = gets.chomp.to_i
-      check("income", @income)
-      puts "Please enter the number of results you would like to see (default = 50)"
-      @results = gets.chomp.to_i
-      check("results", @results)
-      school_list
+    puts "Welcome to the School Finder application!"
+    puts "Please enter a zip code from where you wish to search or enter to exit"
+    @zip = gets.chomp!
+    if @zip == ""
+      exit
     end
+    @zipcode = ZipCode.new(@zip)
+    puts "Please enter the maximum search radius in miles (0-30)"
+    @miles = gets.chomp.to_i
+    check("miles", @miles)
+    puts "Please enter your income (hit enter to skip this step)"
+    @income = gets.chomp.to_i
+    check("income", @income)
+    puts "Please enter the number of results you would like to see (default = 50)"
+    @results = gets.chomp.to_i
+    check("results", @results)
+    school_list
   end
 
   def check(check_type, value)
@@ -77,21 +75,23 @@ class SchoolFinder
 
   def display_schools
     total = summary.size - 1 < results ? summary.size - 1 : results
-    for i in 0..total - 1 do
-      if summary[i][:rank]
-        puts "##{i+1}. #{summary[i][:name]} - rank #{summary[i][:rank]}"
-      else
-        puts "##{i+1}. #{summary[i][:name]} - no ranking"
-      end
-    end
     while true
+      for i in 0..total - 1 do
+        if summary[i][:rank]
+          puts "##{i+1}. #{summary[i][:name]} - rank #{summary[i][:rank]}"
+        else
+          puts "##{i+1}. #{summary[i][:name]} - no ranking"
+        end
+      end
       puts "\nSelect a school for further information or hit enter to start over"
       response = gets.chomp!
       if response == ""
         exit
       end
       response = response.match(/[0-9]+/)[0].to_i
-      response > 0 && response < total && puts(@detail[response-1][:zip].demo.each { |key, value| puts("#{value} is the #{key.split(/(?=[A-Z])/).join(" ")}") });0
+      if response > 0 && response < total
+        puts(@detail[response-1][:zip].demo.each { |key, value| puts("#{value} is the #{key.split(/(?=[A-Z])/).join(" ")}") })
+      end
       #binding.pry
     end
   end
