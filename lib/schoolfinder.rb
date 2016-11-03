@@ -99,5 +99,4 @@ class SchoolFinder
   
 end
 
-test = SchoolFinder.new
-test.call
+SchoolFinder.new.call
