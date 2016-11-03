@@ -66,3 +66,12 @@ This application tries to simplify this process. It queries the user for a zip c
 #### The 'display_school' Method
 
     Displays initial list of schools and detailed information for selected school.
+
+
+The program can be either run from the executable bin/school-finder or installed as a gem.
+
+The user is prompted for the required information and a listing of schools by rank is given. Unranked schools are listed after
+ranked schools. The user can then select the individual schools for more information.
+
+If anyone would like to expand on the functionality of the program please use one of the existing branches or create a new one.
+There is a rich set of information being extracted that may be useful so please check the detailed output for ideas.
