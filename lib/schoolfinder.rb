@@ -100,4 +100,4 @@ class SchoolFinder
 
 end
 
-SchoolFinder.new.call
+#SchoolFinder.new.call
