@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name	= 'school-finder'
-  s.veraion	= "1.0"
+  s.version	= "1.0"
   s.date	= "2016-11-03"
   s.summary	= "Find highly ranked high schools"
   s.description	= "List the best high schools within a given zip code radius"
